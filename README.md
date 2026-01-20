@@ -104,7 +104,7 @@ ORDER BY Month_Number;
 The Power BI report includes three focused dashboards:
 
 ### 1️⃣ Executive Summary
-
+![Executive Summary Dashboard](assets/summary_dashboard.jpg)
 * High-level KPIs
 * Good vs. Bad Loan comparison
 * Loan status performance grid
