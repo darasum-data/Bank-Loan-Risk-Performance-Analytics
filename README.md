@@ -146,7 +146,7 @@ The Power BI report includes three focused dashboards:
 1. **Clone the Repository**
 
 ```bash
-git clone https://github.com/your-username/bank-loan-risk-performance-analysis.git
+git clone https://github.com/darasum-data/Bank-Loan-Risk-Performance-Analytics.git
 ```
 
 2. **Database Setup**
