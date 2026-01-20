@@ -1,145 +1,171 @@
-Bank Loan Risk & Performance Analysis 🏦📊
-Project Overview
 
-This project provides a comprehensive analysis of a bank's lending operations. Using a combination of SQL for data processing and Power BI for visualization, the project tracks key performance indicators (KPIs) like loan application volume, funded amounts, and repayment status. The primary goal is to distinguish between "Good" and "Bad" loans to help the bank manage credit risk and optimize lending strategies.
+# 🏦 Bank Loan Risk & Performance Analysis
 
-🛠️ Tech Stack
+## 📌 Project Overview
 
-Database: SQL Server (Data Cleaning, Analysis, and Validation)
+This project delivers a comprehensive analysis of a bank’s loan portfolio to evaluate lending performance and credit risk. By combining **SQL** for data transformation and analysis with **Power BI** for visualization, the project tracks critical loan metrics and classifies loans into **Good** and **Bad** categories.
 
-Visualization: Power BI Desktop
+The primary objective is to help stakeholders understand portfolio health, identify risk patterns, and support data-driven lending decisions.
 
-Data Source: CSV/Excel (Bank Loan Data)
+---
 
-Knowledge Domain: Banking & Finance (Credit Risk)
+## 🛠️ Tech Stack
 
-📖 Table of Contents
+- **Database:** SQL Server  
+  *(Data cleaning, transformation, KPI calculations)*  
+- **Visualization:** Power BI Desktop  
+- **Data Source:** CSV / Excel (Bank Loan Dataset)  
+- **Domain Knowledge:** Banking & Finance (Credit Risk Analysis)
 
-Business Problem
+---
 
-Data Architecture
+## 📖 Table of Contents
 
-Key Performance Indicators (KPIs)
+- Business Problem  
+- Data Architecture  
+- Key Performance Indicators (KPIs)  
+- SQL Analysis Highlights  
+- Dashboard Features  
+- Insights & Recommendations  
+- How to Use  
 
-SQL Analysis Highlights
+---
 
-Dashboard Features
+## 🎯 Business Problem
 
-Insights & Recommendations
+The bank requires a reliable and transparent way to monitor the health of its loan portfolio. This project answers key business questions such as:
 
-🎯 Business Problem
+- What is the total funded loan amount compared to total repayments received?
+- How do loan applications and funding amounts change month over month?
+- What percentage of loans are classified as **Bad Loans (Charged Off)**, and how do they affect profitability?
+- Which states and loan purposes contribute the most to lending volume?
 
-The bank needs a clear way to monitor the health of its loan portfolio. Key questions addressed:
+---
 
-What is our total exposure (Funded Amount) versus what we have recovered?
+## 🏗️ Data Architecture
 
-How do loan applications trend month-over-month?
+The project follows an end-to-end analytics workflow:
 
-What is the percentage of "Bad Loans" (Charged Off) and how does it impact profitability?
+1. **Domain Research**  
+   Understanding the loan lifecycle (Application → Evaluation → Approval → Disbursement → Monitoring).
 
-Which states and loan purposes are driving the most volume?
+2. **SQL Processing**  
+   Writing optimized SQL queries to calculate KPIs such as MTD, PMTD, and MoM metrics.
 
-🏗️ Data Architecture
+3. **Data Modeling**  
+   Preparing clean, analysis-ready datasets for Power BI consumption.
 
-The project follows an end-to-end data pipeline:
+4. **Visualization**  
+   Designing interactive dashboards for executive, analytical, and operational use.
 
-Domain Research: Understanding the loan lifecycle (Application -> Evaluation -> Disbursement -> Monitoring).
+---
 
-SQL Extraction: Writing complex queries to calculate MTD, PMTD, and MoM metrics.
+## 📈 Key Performance Indicators (KPIs)
 
-Data Modeling: Connecting SQL datasets to Power BI.
+- **Total Loan Applications:** 38.6K (MTD: 4.3K)  
+- **Total Funded Amount:** $435.8M  
+- **Total Amount Received:** $473.1M  
+- **Average Interest Rate:** 12.0%  
+- **Average Debt-to-Income (DTI):** 13.3%  
+- **Good Loans:** 86.2%  
+- **Bad Loans:** 13.8%
 
-Visualization: Creating interactive dashboards for Executive, Tactical, and Operational views.
+---
 
-📈 Key Performance Indicators (KPIs)
+## 💻 SQL Analysis Highlights
 
-Total Loan Applications: 38.6K (MTD: 4.3K)
+All SQL scripts are available in the `/SQL_Queries` folder.
 
-Total Funded Amount: $435.8M
+### Example: Good vs. Bad Loan Percentage
 
-Total Amount Received: $473.1M
-
-Average Interest Rate: 12.0%
-
-Average DTI (Debt-to-Income): 13.3%
-
-Good Loan %: 86.2% | Bad Loan %: 13.8%
-
-💻 SQL Analysis Highlights
-
-Detailed SQL scripts can be found in the /SQL_Queries folder.
-
-Example: Calculating Good vs. Bad Loan Metrics
-
-code
-SQL
-download
-content_copy
-expand_less
--- Identifying Bad Loan percentage
+```sql
 SELECT
-    (COUNT(CASE WHEN loan_status = 'Charged Off' THEN id END) * 100.0) / 
+    (COUNT(CASE WHEN loan_status = 'Charged Off' THEN id END) * 100.0) /
     COUNT(id) AS Bad_Loan_Percentage
 FROM bank_loan_data;
+````
 
-Example: Monthly Trend Analysis
+### Example: Monthly Loan Application Trend
 
-code
-SQL
-download
-content_copy
-expand_less
-SELECT 
-    MONTH(issue_date) AS Month_Number, 
-    DATENAME(MONTH, issue_date) AS Month_Name, 
+```sql
+SELECT
+    MONTH(issue_date) AS Month_Number,
+    DATENAME(MONTH, issue_date) AS Month_Name,
     COUNT(id) AS Total_Applications
 FROM bank_loan_data
 GROUP BY MONTH(issue_date), DATENAME(MONTH, issue_date)
 ORDER BY Month_Number;
-📊 Dashboard Features
+```
 
-The Power BI report consists of three specialized views:
+---
 
-1. Executive Summary
+## 📊 Dashboard Features
 
-Focuses on high-level KPIs and risk assessment. It includes "Good vs. Bad Loan" gauges and a status grid comparing DTI and Interest Rates.
+The Power BI report includes three focused dashboards:
 
-2. Portfolio Overview
+### 1️⃣ Executive Summary
 
-A tactical view using:
+* High-level KPIs
+* Good vs. Bad Loan comparison
+* Loan status performance grid
+* Risk indicators using Interest Rate and DTI
 
-Line Chart: Monthly lending trends.
+### 2️⃣ Portfolio Overview
 
-Filled Map: Regional analysis by State.
+* **Line Chart:** Monthly lending trends
+* **Filled Map:** Regional analysis by state
+* **Tree Map:** Home ownership distribution
+* **Donut Chart:** Loan term comparison (36 vs 60 months)
 
-Tree Map: Home ownership distribution.
+### 3️⃣ Detailed View
 
-Donut Chart: Loan term distribution (36 vs 60 months).
+* Row-level loan records
+* Filters by loan grade, purpose, and state
+* Designed for auditing and operational analysis
 
-3. Detailed View
+---
 
-An operational table allowing for row-level auditing of individual loan records, filtered by Grade, Purpose, and State.
+## 💡 Insights & Recommendations
 
-💡 Insights & Recommendations
+* **Risk-Based Pricing:**
+  Bad loans carry a higher average interest rate (13.88%) compared to good loans (11.64%), indicating active risk-adjusted pricing.
 
-Risk Premium: Bad loans have a higher average interest rate (13.88%) than good loans (11.64%), showing the bank's risk-based pricing is active.
+* **Seasonality:**
+  Loan activity peaks in Q4, with December showing the highest repayment volume.
 
-Seasonality: Lending activity peaks in Q4, particularly in December ($58M received).
+* **Loan Purpose Concentration:**
+  Debt consolidation dominates loan demand, suggesting opportunities for tailored consolidation products.
 
-Top Purpose: "Debt Consolidation" accounts for the vast majority of loans, suggesting a need for specialized consolidation products.
+* **Borrower Stability:**
+  Applicants with 10+ years of employment represent the most stable and frequent borrower segment.
 
-Stability: Borrowers with 10+ years of employment are the most frequent applicants, indicating a stable target demographic.
+---
 
-🚀 How to Use
+## 🚀 How to Use
 
-Clone the Repo: git clone https://github.com/your-username/bank-loan-analysis.git
+1. **Clone the Repository**
 
-Database Setup: Execute the .sql scripts in your SQL Server environment to create the necessary views.
+```bash
+git clone https://github.com/your-username/bank-loan-risk-performance-analysis.git
+```
 
-Power BI: Open the .pbix file. Update the data source settings to point to your SQL Server or the provided CSV.
+2. **Database Setup**
+   Execute the SQL scripts in SQL Server to create required tables and views.
 
-Contact
+3. **Power BI Dashboard**
+   Open the `.pbix` file and update the data source connection to SQL Server or the provided CSV files.
 
-[Your Name]
-[Your LinkedIn Profile] | [Your Portfolio Website]
-Data Analyst | SQL & Power BI Specialist
+---
+
+## 📬 Contact
+
+**Dara Sum**
+Data Analyst | SQL & Power BI
+<a href="https://www.linkedin.com/in/darasum-data" target="_blank" 
+   style="display: inline-block; padding: 10px 20px; background-color: #0A66C2; 
+          color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+  Connect on LinkedIn
+</a>
+
+
+```
