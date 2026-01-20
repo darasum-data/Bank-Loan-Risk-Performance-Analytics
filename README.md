@@ -104,21 +104,21 @@ ORDER BY Month_Number;
 The Power BI report includes three focused dashboards:
 
 ### 1️⃣ Executive Summary
-![Executive Summary Dashboard](assets/summary_dashboard.jpg)
+![Executive Summary Dashboard](Dashboads/Summary.jpg)
 * High-level KPIs
 * Good vs. Bad Loan comparison
 * Loan status performance grid
 * Risk indicators using Interest Rate and DTI
 
 ### 2️⃣ Portfolio Overview
-
+![Executive Overview Dashboard](Dashboads/Overview.jpg)
 * **Line Chart:** Monthly lending trends
 * **Filled Map:** Regional analysis by state
 * **Tree Map:** Home ownership distribution
 * **Donut Chart:** Loan term comparison (36 vs 60 months)
 
 ### 3️⃣ Detailed View
-
+![Executive Detail Dashboard](Dashboads/detail.jpg)
 * Row-level loan records
 * Filters by loan grade, purpose, and state
 * Designed for auditing and operational analysis
